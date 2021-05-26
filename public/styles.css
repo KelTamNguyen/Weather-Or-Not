@@ -7,6 +7,14 @@ body {
   background-color: #EEEEEE;
 }
 
+footer {
+  position: absolute;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
+}
+
 input {
   background-color: #5B45B9;
   color : #FFFFFF;
@@ -18,8 +26,18 @@ input::placeholder {
   color: #C7BCF8;
 }
 
+ul {
+  list-style-type: none;
+}
+
 .add-to-list {
   padding : 10px 0;
+}
+
+.btn-div {
+  display: flex;
+  /* background: gray; */
+  align-items: center;
 }
 
 .card {
@@ -44,11 +62,6 @@ input::placeholder {
   margin-top: 5px;
   padding: 2px 16px;
   color: #2F2366;
-  align-items: center;
-}
-
-.container h2:hover {
-  border: 3px solid #5B45B9;
 }
 
 .header {
