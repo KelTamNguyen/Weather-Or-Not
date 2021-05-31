@@ -65,6 +65,14 @@ ul {
   color: #2F2366;
 }
 
+.fa-times {
+  color: tomato;
+}
+
+.fa-check {
+  color: green;
+}
+
 .header {
   height: 30%;
   background-color: #5B45B9;
