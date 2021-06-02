@@ -1,5 +1,6 @@
 import { useState } from "react";
 import EditForm from "./EditForm";
+import { AiFillEdit, AiFillCloseCircle } from "react-icons/ai"
 
 function ListItem({ id, action }) {
 
@@ -21,9 +22,11 @@ function ListItem({ id, action }) {
             {editing === true ?  <EditForm value={action} id={id} /> : <h2>{action}</h2>}
             <div className="btn-div">
                 {/* <input type="radio"></input> */}
-                <button onClick={toggleEdit}><i className="fas fa-edit" /></button>
+                <button onClick={toggleEdit}>
+                    <AiFillEdit />
+                </button>
                 <button onClick={remove}>
-                    <i className="fas fa-times" />
+                    <AiFillCloseCircle />
                 </button>
             </div>
         </div>
