@@ -1,28 +1,32 @@
 import {React, useState} from "react";
+import actions from "../actions";
 
 function Form() {
 
     const [userInput, setUserInput] = useState("");
 
-    function handleChange(e) {
+    function updateToDo(e) {
         setUserInput(e.currentTarget.value)
+    }
+
+    function addToDo(e) {
+        e.preventDefault();
+        let id = actions.length + 1;
+        actions.push({id: id, action: userInput});
     }
 
     return(
         <div className="card-bottom">
-            <form className="add-to-list">
+            <form className="add-to-list" onSubmit={addToDo}>
                 <hr />
                 <input 
                     type="text" 
                     id="my-input" 
                     placeholder="Add Item" 
                     name="todo"
-                    onChange={handleChange}
+                    onChange={updateToDo}
                 />
-                <button 
-                    type="button" 
-                    name="button"
-                >
+                <button>
                     ADD ITEM
                 </button>
             </form>
