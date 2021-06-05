@@ -1,7 +1,7 @@
 
-* {
+/* * {
   font-family: 'Open Sans', sans-serif;
-}
+} */
 
 body {
   background-color: #EEEEEE;
@@ -65,14 +65,6 @@ ul {
   color: #2F2366;
 }
 
-.fa-times {
-  color: tomato;
-}
-
-.fa-check {
-  color: green;
-}
-
 .header {
   height: 30%;
   background-color: #5B45B9;
@@ -83,4 +75,50 @@ ul {
 .list-item {
   display: flex;
   justify-content: space-between;
+}
+
+.list-item button {
+  justify-content: center;
+  align-items: center;
+}
+
+.locale {
+  /* position: absolute;
+  bottom: 0;
+  right: 0; */
+}
+
+.temperature {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.weather-desc {
+  display: flex;
+  align-items: center;
+  /* position: absolute;
+  top: 0;
+  left: 0; */
+}
+
+.weather-desc img {
+  max-width: 25px;
+  height: auto;
+}
+
+.weather-widget {
+  background-color: #EEEEEE;
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  padding: 0 10px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.weather-widget p {
+  font-size: 0.8rem;
+}
+
+.location-col {
+  text-align: right;
 }
