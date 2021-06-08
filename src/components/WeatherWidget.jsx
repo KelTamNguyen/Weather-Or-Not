@@ -1,4 +1,4 @@
-import { GoLocation } from "react-icons/go";
+import { MdLocationOn } from "react-icons/md";
 
 function WeatherWidget({ weather, unitSymbol }) {
 
@@ -15,7 +15,8 @@ function WeatherWidget({ weather, unitSymbol }) {
             </div>
             <div className="location-col">
                 {weather && <p>{date.toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"})} {date.toLocaleString("default", {weekday: "short"})}</p>}
-                {weather && <p className="locale"><GoLocation />{`${weather.name},${weather.sys.country}`}</p>}
+                {weather && <p>{`${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`}</p>}
+                {weather && <p className="locale"><MdLocationOn /> {`${weather.name}, ${weather.sys.country}`}</p>}
             </div>
         </div>
     );

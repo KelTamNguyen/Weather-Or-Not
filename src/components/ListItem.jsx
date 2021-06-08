@@ -6,11 +6,6 @@ function ListItem({ id, action }) {
 
     const [editing, setEditing] = useState("false");
 
-    function toggleEdit(e) {
-        setEditing(!editing);
-        e.preventDefault();
-    }
-
     //placeholder
     function remove(e) {
         console.log("remove: " + id);
@@ -19,10 +14,10 @@ function ListItem({ id, action }) {
 
     return(
         <div className="list-item">
-            {editing === true ?  <EditForm value={action} id={id} /> : <h2>{action}</h2>}
+            {editing ? <h2>{action}</h2> : <EditForm value={action} id={id} />}
             <div className="btn-div">
                 {/* <input type="radio"></input> */}
-                <button onClick={toggleEdit}>
+                <button onClick={()=> {setEditing(!editing)}}>
                     <AiFillEdit />
                 </button>
                 <button onClick={remove}>

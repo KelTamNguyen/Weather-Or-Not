@@ -1,22 +1,22 @@
 const actions = [
     {
-        id: 1,
+        id: 0,
         action: "Vacuum"
     },
     {
-        id: 2,
+        id: 1,
         action: "Learn More Code"
     },
     {
-        id: 3,
+        id: 2,
         action: "Build ToDo List Project"
     },
     {
-        id: 4,
+        id: 3,
         action: "Netflix"
     },
     {
-        id: 5,
+        id: 4,
         action: "Chills"
     }
 ];

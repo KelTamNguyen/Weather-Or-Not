@@ -13,6 +13,8 @@ function EditForm({ value, id }) {
 
     //placeholder function
     function applyEdit(e) {
+        actions[id].action = currentValue;
+        console.log(actions[id]);
         console.log(currentValue);
         e.preventDefault();
     }
