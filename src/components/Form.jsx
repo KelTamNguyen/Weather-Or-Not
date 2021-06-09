@@ -17,8 +17,8 @@ function Form() {
 
     return(
         <div className="card-bottom">
-            <form className="add-to-list" onSubmit={addToDo}>
-                <hr />
+            <hr />
+            <form className="add-to-list" onSubmit={addToDo}>  
                 <input 
                     type="text" 
                     id="my-input" 

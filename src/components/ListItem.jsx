@@ -15,8 +15,7 @@ function ListItem({ id, action }) {
     return(
         <div className="list-item">
             {editing ? <h2>{action}</h2> : <EditForm value={action} id={id} />}
-            <div className="btn-div">
-                {/* <input type="radio"></input> */}
+            <div className="btn-group">
                 <button onClick={()=> {setEditing(!editing)}}>
                     <AiFillEdit />
                 </button>
