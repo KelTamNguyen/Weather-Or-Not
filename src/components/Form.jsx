@@ -1,7 +1,7 @@
 import {React, useState} from "react";
 import actions from "../actions";
 
-function Form() {
+function Form({ addTask }) {
 
     const [userInput, setUserInput] = useState("");
 
@@ -9,22 +9,23 @@ function Form() {
         setUserInput(e.currentTarget.value)
     }
 
-    function addToDo(e) {
+    function handleSubmit(e) {
         e.preventDefault();
-        let id = actions.length + 1;
-        actions.push({id: id, action: userInput});
+        addTask(userInput);
+        setUserInput("");
     }
 
     return(
         <div className="card-bottom">
             <hr />
-            <form className="add-to-list" onSubmit={addToDo}>  
+            <form className="add-to-list" onSubmit={handleSubmit}>  
                 <input 
                     type="text" 
                     id="my-input" 
                     placeholder="Add Item" 
                     name="todo"
                     onChange={updateToDo}
+                    value={userInput}
                 />
                 <button>
                     ADD ITEM

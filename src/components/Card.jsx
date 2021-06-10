@@ -2,17 +2,18 @@ import { useEffect, useState } from "react";
 import Header from "./Header";
 import Form from "./Form";
 import ListItem from "./ListItem";
-import actions from "../actions";
 import WeatherWidget from "./WeatherWidget";
 import axios from "axios";
 import Loading from "./Loading";
+import { nanoid } from "nanoid";
 
-function Card() {
+export default function Card(props) {
     const [units, setUnits] = useState("imperial");
     const [unitSymbol, setUnitSymbol] = useState("F");
     const [weather, setWeather] = useState(null);
     const [loading, setLoading] = useState(true);
     const [city, setCity] = useState(null);
+    const [todos, setTodos] = useState(props.todos);
 
     const OPENWEATHER_URL = "https://api.openweathermap.org/data/2.5/weather?";
     const OPENWEATHER_ID = "8e47aca9554bd44b5e4ee66169ab505a";
@@ -47,38 +48,51 @@ function Card() {
         })
     }
 
-    function getTempUnit(units) {
-        switch(units) {
-            case "imperial":
-                setUnitSymbol("F");
-                break;
-            case "metric":
-                setUnitSymbol("C");
-                break;
-        }
-    }
-
     useEffect(() => {
         getWeatherAtLocation();
     },[]);
 
+    function removeItem(id) {
+        const newTodoList = todos.filter(todo => todo.id !== id);
+        console.log(newTodoList);
+        setTodos(newTodoList);
+        //console.log(id)
+    }
+
+    const todoList = todos.map(todo => (
+        <ListItem 
+            key={todo.id}
+            id={todo.id}
+            action={todo.action}
+            removeItem={removeItem}
+        />
+    ));
+
+    function addTask(name) {
+        const newTask = {id: nanoid(), action: name};
+        setTodos([...todos, newTask]);
+    }
+
     return (
-        <div className="card">
+    <div className="card">
             <Header />
             <div className="container">
-            {loading ? <Loading /> : city && <WeatherWidget weather={weather} city={city} unitSymbol={unitSymbol} />}
-                {actions.map(action => (
+                {loading ? <Loading /> : city && <WeatherWidget weather={weather} city={city} unitSymbol={unitSymbol} />}
+                <ul
+                    role="list"
+                    aria-labelledby="list-heading"
+                >
+                    {todoList}
+                </ul>
+                {/* {todos.map(todo => (
                     <ListItem 
-                        key={action.id}
-                        id={action.id}
-                        action={action.action}
-                        //removeItem={removeItem}
+                        key={todo.id} 
+                        id={todo.id} 
+                        action={todo.action}
                     />
-                ))}
+                ))} */}
             </div>
-            <Form />
+            <Form addTask={addTask} />
         </div>
     );
 }
-
-export default Card;

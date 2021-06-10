@@ -11,14 +11,14 @@ footer {
 }
 
 input {
-  background-color: #5B45B9;
-  color : #FFFFFF;
+  background: linear-gradient(45deg, #b460ec, #6fa3f9);
+  color : #ffffff;
   border: none;
   /* margin-bottom: 0.75em; */
 }
 
 input::placeholder {
-  color: #C7BCF8;
+  color: #ffffff;
 }
 
 .add-to-list {
@@ -30,6 +30,11 @@ input::placeholder {
 
 .add-to-list input {
   font-size: 1rem;
+  /*margin-bottom: 0*/
+}
+
+.add-to-list button {
+  font-family: 'Open Sans', sans-serif;
 }
 
 .btn-group {

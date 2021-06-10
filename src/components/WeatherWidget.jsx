@@ -1,4 +1,5 @@
 import { MdLocationOn } from "react-icons/md";
+import { GrRefresh } from "react-icons/gr";
 
 function WeatherWidget({ weather, unitSymbol, city }) {
 

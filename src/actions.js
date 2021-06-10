@@ -1,10 +1,10 @@
 const actions = [
     {
-        id: 0,
+        id: "todo-0",
         action: "Vacuum"
     },
     {
-        id: 1,
+        id: "td-1",
         action: "Learn More Code"
     },
     {
