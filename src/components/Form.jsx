@@ -1,6 +1,6 @@
 import {React, useState} from "react";
 
-function Form({ addTask }) {
+export default function Form({ addTask }) {
 
     const [userInput, setUserInput] = useState("");
 
@@ -33,5 +33,3 @@ function Form({ addTask }) {
         </div>
     );
 }
-
-export default Form;

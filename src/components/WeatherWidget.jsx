@@ -1,7 +1,7 @@
 import { MdLocationOn } from "react-icons/md";
 import { GrRefresh } from "react-icons/gr";
 
-function WeatherWidget({ weather, unitSymbol, city }) {
+export default function WeatherWidget({ weather, unitSymbol, city }) {
 
     const date = new Date();
 
@@ -27,5 +27,3 @@ function WeatherWidget({ weather, unitSymbol, city }) {
         </div>
     );
 }
-
-export default WeatherWidget;

@@ -88,9 +88,8 @@ export default function Card(props) {
             <Header />
             <div className="container">
                 {loading ? <Loading /> : city && <WeatherWidget weather={weather} city={city} unitSymbol={unitSymbol} />}
-                <ul
-                    aria-labelledby="list-heading"
-                >
+                <p>4 tasks left</p>
+                <ul aria-labelledby="list-heading">
                     {todoList}
                 </ul>
             </div>

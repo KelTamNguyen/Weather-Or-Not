@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AiFillEdit, AiFillCloseCircle } from "react-icons/ai"
 
-function ListItem({ id, action, removeItem, editItem }) {
+export default function ListItem({ id, action, removeItem, editItem }) {
 
     const [editing, setEditing] = useState("false");
     const [currentValue, setCurrentValue] = useState("");
@@ -20,7 +20,12 @@ function ListItem({ id, action, removeItem, editItem }) {
 
     const viewTemplate = (
         <div className="list-item">
-            <h2>{action}</h2>
+            <div className="item-label">
+                <input className="checkbox" type="checkbox" />
+                <label htmlFor="action">
+                    <h2>{action}</h2>
+                </label>
+            </div>
             <div className="btn-group">
                 <button
                     type="button"
@@ -77,5 +82,3 @@ function ListItem({ id, action, removeItem, editItem }) {
         </li>
     );
 }
-
-export default ListItem;

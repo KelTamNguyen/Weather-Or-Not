@@ -1,4 +1,4 @@
-function Header(props) {
+export default function Header(props) {
 
     return (
         <div className="header">
@@ -6,5 +6,3 @@ function Header(props) {
         </div>
     )
 }
-
-export default Header;

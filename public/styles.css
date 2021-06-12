@@ -49,7 +49,7 @@ ul {
 .card {
   background-color: #FFFFFF;
   display : flex;
-  width: 40%;
+  width: 50%;
   flex-direction: column;
   position: absolute;
   top: 50%;
@@ -79,9 +79,17 @@ ul {
   color: #FFFFFF;
 }
 
+.item-label {
+  display: flex;
+}
+
 .list-item {
   display: flex;
   justify-content: space-between;
+}
+
+.list-item label {
+  margin-left: 5px;
 }
 
 .list-item button {
