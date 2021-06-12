@@ -56,7 +56,16 @@ export default function Card(props) {
         const newTodoList = todos.filter(todo => todo.id !== id);
         console.log(newTodoList);
         setTodos(newTodoList);
-        //console.log(id)
+    }
+
+    function editItem(id, newName) {
+        const editedTodoList = todos.map(todo => {
+            if (id === todo.id) {
+                return {...todo, action: newName}
+            }
+            return todo
+        });
+        setTodos(editedTodoList);
     }
 
     const todoList = todos.map(todo => (
@@ -65,6 +74,7 @@ export default function Card(props) {
             id={todo.id}
             action={todo.action}
             removeItem={removeItem}
+            editItem={editItem}
         />
     ));
 
@@ -79,18 +89,10 @@ export default function Card(props) {
             <div className="container">
                 {loading ? <Loading /> : city && <WeatherWidget weather={weather} city={city} unitSymbol={unitSymbol} />}
                 <ul
-                    role="list"
                     aria-labelledby="list-heading"
                 >
                     {todoList}
                 </ul>
-                {/* {todos.map(todo => (
-                    <ListItem 
-                        key={todo.id} 
-                        id={todo.id} 
-                        action={todo.action}
-                    />
-                ))} */}
             </div>
             <Form addTask={addTask} />
         </div>

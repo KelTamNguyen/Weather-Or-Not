@@ -21,6 +21,10 @@ input::placeholder {
   color: #ffffff;
 }
 
+ul {
+  list-style-type: none;
+}
+
 .add-to-list {
   padding : 10px 15%;
   display: flex;
