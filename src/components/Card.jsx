@@ -6,6 +6,7 @@ import WeatherWidget from "./WeatherWidget";
 import axios from "axios";
 import Loading from "./Loading";
 import { nanoid } from "nanoid";
+//import { TaskProvider } from "../TaskContext";
 
 export default function Card(props) {
     const [units, setUnits] = useState("imperial");
@@ -50,7 +51,12 @@ export default function Card(props) {
 
     useEffect(() => {
         getWeatherAtLocation();
-    },[]);
+    });
+
+    function refreshWeather() {
+        setLoading(true);
+        getWeatherAtLocation();
+    }
 
     function removeItem(id) {
         const newTodoList = todos.filter(todo => todo.id !== id);
@@ -79,16 +85,23 @@ export default function Card(props) {
     ));
 
     function addTask(name) {
-        const newTask = {id: nanoid(), action: name};
+        if (todos.filter(todo => todo.action === name).length === 0) {
+            const newTask = {id: nanoid(), action: name};
         setTodos([...todos, newTask]);
+        } else {
+            alert(`Item "${name}" already exists`)
+        }
     }
 
     return (
     <div className="card">
             <Header />
             <div className="container">
-                {loading ? <Loading /> : city && <WeatherWidget weather={weather} city={city} unitSymbol={unitSymbol} />}
-                <p>4 tasks left</p>
+                {loading ? <Loading /> : city && <WeatherWidget weather={weather} city={city} unitSymbol={unitSymbol} refreshWeather={refreshWeather} />}
+                <div>
+                    <p>{todos.length} task(s) left</p>
+                    <p>active</p>
+                </div>
                 <ul aria-labelledby="list-heading">
                     {todoList}
                 </ul>

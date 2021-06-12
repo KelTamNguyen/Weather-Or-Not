@@ -1,7 +1,7 @@
 import { MdLocationOn } from "react-icons/md";
 import { GrRefresh } from "react-icons/gr";
 
-export default function WeatherWidget({ weather, unitSymbol, city }) {
+export default function WeatherWidget({ weather, unitSymbol, city, refreshWeather }) {
 
     const date = new Date();
 
@@ -12,7 +12,7 @@ export default function WeatherWidget({ weather, unitSymbol, city }) {
                     <img src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} alt="wewather-icon" />
                     <p>
                         {weather.weather[0].description} 
-                        <span onClick={() => {console.log("clicked!")}}>
+                        <span onClick={() => {refreshWeather()}}>
                             <GrRefresh />
                         </span>
                     </p>
