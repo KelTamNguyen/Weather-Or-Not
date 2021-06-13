@@ -1,23 +1,28 @@
 const actions = [
     {
         id: "todo-0",
-        action: "Vacuum"
+        action: "Vacuum",
+        completed: true
     },
     {
         id: "td-1",
-        action: "Learn More Code"
+        action: "Learn More Code",
+        completed: false
     },
     {
         id: 2,
-        action: "Build ToDo List Project"
+        action: "Build ToDo List Project",
+        completed: false
     },
     {
         id: 3,
-        action: "Netflix"
+        action: "Netflix",
+        completed: false
     },
     {
         id: 4,
-        action: "Chills"
+        action: "Chills",
+        completed: true
     }
 ];
 

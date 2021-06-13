@@ -12,7 +12,7 @@ export default function WeatherWidget({ weather, unitSymbol, city, refreshWeathe
                     <img src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} alt="wewather-icon" />
                     <p>
                         {weather.weather[0].description} 
-                        <span onClick={() => {refreshWeather()}}>
+                        <span className="refresh-btn" onClick={() => {refreshWeather()}}>
                             <GrRefresh />
                         </span>
                     </p>

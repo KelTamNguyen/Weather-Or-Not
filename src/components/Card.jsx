@@ -51,7 +51,7 @@ export default function Card(props) {
 
     useEffect(() => {
         getWeatherAtLocation();
-    });
+    }, []);
 
     function refreshWeather() {
         setLoading(true);
@@ -60,7 +60,6 @@ export default function Card(props) {
 
     function removeItem(id) {
         const newTodoList = todos.filter(todo => todo.id !== id);
-        console.log(newTodoList);
         setTodos(newTodoList);
     }
 
@@ -81,16 +80,28 @@ export default function Card(props) {
             action={todo.action}
             removeItem={removeItem}
             editItem={editItem}
+            completed={todo.completed}
+            toggleActiveStatus={toggleActiveStatus}
         />
     ));
 
     function addTask(name) {
         if (todos.filter(todo => todo.action === name).length === 0) {
-            const newTask = {id: nanoid(), action: name};
-        setTodos([...todos, newTask]);
+            const newTask = {id: nanoid(), action: name, completed: false};
+            setTodos([...todos, newTask]);
         } else {
             alert(`Item "${name}" already exists`)
         }
+    }
+
+    function toggleActiveStatus(id) {
+        let updatedTaskList = todos.map(todo => {
+            if (todo.id === id) {
+                return {...todo, active: !todo.active}
+            } 
+            return todo;
+        });
+        setTodos(updatedTaskList);
     }
 
     return (
@@ -98,9 +109,12 @@ export default function Card(props) {
             <Header />
             <div className="container">
                 {loading ? <Loading /> : city && <WeatherWidget weather={weather} city={city} unitSymbol={unitSymbol} refreshWeather={refreshWeather} />}
-                <div>
-                    <p>{todos.length} task(s) left</p>
-                    <p>active</p>
+                <div className="dashboard">
+                    <h4>{todos.length} task(s) left</h4>
+                    <hr />
+                    <h4>Active</h4>
+                    <hr />
+                    <h4>weather-effected</h4>
                 </div>
                 <ul aria-labelledby="list-heading">
                     {todoList}
