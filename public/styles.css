@@ -10,11 +10,22 @@ footer {
   height: 2.5rem;
 }
 
-input {
+input[type=text] {
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  border: 1px solid #2d9fd9;
+  padding-left: 10px;
+  height: 30px;
   background: linear-gradient(45deg, #b460ec, #6fa3f9);
   color : #ffffff;
   border: none;
   /* margin-bottom: 0.75em; */
+}
+
+input[type=text]:focus {
+  outline: none;
+  border: 1px solid #eeee;
 }
 
 input::placeholder {
@@ -23,6 +34,8 @@ input::placeholder {
 
 ul {
   list-style-type: none;
+  max-height: 350px;
+  overflow: auto;
 }
 
 .add-to-list {
@@ -44,6 +57,7 @@ ul {
 .btn-group {
   display: flex;
   align-items: center;
+  margin-right: 10px
 }
 
 .card {
@@ -81,6 +95,7 @@ ul {
 
 .item-label {
   display: flex;
+  align-items: center;
 }
 
 .list-item {
@@ -145,4 +160,14 @@ ul {
 
 .location-col {
   text-align: right;
+}
+
+.dashboard {
+  display: flex;
+  justify-content: center;
+  padding: 0 10px;
+}
+
+.dashboard hr{
+  border: 3px solid #2F2366;
 }
