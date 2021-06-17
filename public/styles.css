@@ -14,7 +14,6 @@ input[type=text] {
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   border-radius: 20px;
-  border: 1px solid #2d9fd9;
   padding-left: 10px;
   height: 30px;
   background: linear-gradient(45deg, #b460ec, #6fa3f9);
@@ -170,4 +169,25 @@ ul {
 
 .dashboard hr{
   border: 3px solid #2F2366;
+}
+
+@media (max-width:800px) {
+  /*add responsive styling here*/
+  .card {
+    width: 70vmin;
+  }
+}
+
+@media (max-width: 350px) {
+  .list-item h2 {
+    font-size: 1rem;
+  }
+
+  .card-bottom input {
+    width: 50%;
+  }
+
+  .container {
+    /* padding: 0; */
+  }
 }
