@@ -1,0 +1,29 @@
+{
+    "tasks": [
+        {
+            "id": "todo-0",
+            "task": "Vacuum",
+            "completed": true
+        },
+        {
+            "id": "td-1",
+            "task": "Learn More Code",
+            "completed": false
+        },
+        {
+            "id": 2,
+            "task": "Build ToDo List Project",
+            "completed": false
+        },
+        {
+            "id": 3,
+            "task": "Netflix",
+            "completed": false
+        },
+        {
+            "id": 4,
+            "task": "Chills",
+            "completed": true
+        }
+    ]
+}
