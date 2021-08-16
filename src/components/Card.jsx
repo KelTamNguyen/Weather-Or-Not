@@ -19,9 +19,7 @@ export default function Card(props) {
     const [city, setCity] = useState(null);
     const [tasks, setTasks] = useState([]);
 
-    //const OPENWEATHER_URL = "https://api.openweathermap.org/data/2.5/weather?";
-    //const OPENWEATHER_ID = "8e47aca9554bd44b5e4ee66169ab505a";
-    //const LOCATIONIQ_ID = "pk.8546199d5ee906e4ec8353313c26f735";
+    const OPENWEATHER_URL = "https://api.openweathermap.org/data/2.5/weather?";
 
     function getWeatherAtLocation() {
         if (navigator.geolocation) {  
@@ -29,7 +27,7 @@ export default function Card(props) {
                 try {
                     let lat = position.coords.latitude;
                     let lon = position.coords.longitude;
-                    let url = OPENWEATHER_URL + `lat=${lat}&lon=${lon}&appid=${OPENWEATHER_ID}&units=${units}`;
+                    let url = OPENWEATHER_URL + `lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}&units=${units}`;
                     const response = await axios.get(url);
                     setWeather(response.data);
                     getCity(lat, lon);
@@ -41,15 +39,16 @@ export default function Card(props) {
     }
 
     function getCity(lat, lon) {
-        axios.get(`https://us1.locationiq.com/v1/reverse.php?key=${LOCATIONIQ_ID}&lat=${lat}&lon=${lon}&format=json`).then(
-            (response) => {
+        axios
+            .get(`https://us1.locationiq.com/v1/reverse.php?key=${process.env.LOCATIONIQ_ID}&lat=${lat}&lon=${lon}&format=json`)
+            .then((response) => {
                 let address = response.data.address;
                 setCity(address.city);
                 setLoading(false);
-            }
-        ).catch((error) => {
+            })
+            .catch((error) => {
             console.log(error);
-        })
+            })
     }
 
     useEffect(() => {
@@ -81,7 +80,7 @@ export default function Card(props) {
 
     function addTask(name) {
         if (tasks.filter(todo => todo.action === name).length === 0) {
-            const newTask = {id: nanoid(), action: name, completed: false};
+            const newTask = {id: nanoid(), task: name, completed: false};
             setTasks(tasks.concat(newTask));
         } else {
             alert(`Item "${name}" already exists`)
