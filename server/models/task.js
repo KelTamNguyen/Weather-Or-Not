@@ -2,25 +2,33 @@ const mongoose = require('mongoose');
 
 const url = process.env.MONGODB_URI;
 
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+console.log('connecting to', url);
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+	.then(() => {    
+		console.log('connected to MongoDB');
+	})  
+	.catch((error) => {    
+		console.log('error connecting to MongoDB:', error.message);
+	});
 
 const taskSchema = new mongoose.Schema({
-    task: {
-        type: String,
-        required: true
-    },
-    completed: {
-        type: Boolean, 
-        default: false
-    }
+	task: {
+		type: String,
+		required: true,
+		unique: true
+	},
+	completed: {
+		type: Boolean, 
+		default: false
+	}
 });
 
 mongoose.set('toJSON', {
-    transform: (document, returnedObject) => {
-        returnedObject.id = returnedObject._id.toString();
-        delete returnedObject._id;
-        delete returnedObject.__v;
-    }
+	transform: (document, returnedObject) => {
+		returnedObject.id = returnedObject._id.toString();
+		delete returnedObject._id;
+		delete returnedObject.__v;
+	}
 });
 
-module.exports = mongoose.model('Task', taskSchema);
+module.exports = mongoose.model('task', taskSchema);

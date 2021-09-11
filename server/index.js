@@ -1,10 +1,10 @@
 require('dotenv').config();
 const express = require('express');
+var morgan = require('morgan');
 const cors = require('cors');
-const Task = require('./models/task');
-const morgan = require('morgan');
-
 const app = express();
+const Task = require('./models/task');
+
 app.use(express.json());
 app.use(cors);
 app.use(morgan('tiny'));
@@ -12,9 +12,11 @@ app.use(morgan('tiny'));
 morgan.token('body', (req) => JSON.stringify(req.body));
 
 app.get('/api/tasks', (req, res) => {
-	Task.find({}).then(tasks => {
-		res.json(tasks.toJSON());
-	});
+	// Task.find({})
+	// 	.then(tasks => {
+	// 		res.json(tasks);
+	// 	});
+	res.json({msg : 'idk man'});
 });
 
 app.get('/api/tasks/:id', (req, res, next) => {
@@ -88,7 +90,7 @@ const errorHandler = (err, req, res, next) => {
 
 app.use(errorHandler);
 
-const PORT = 3001;
+const PORT = 3002;
 app.listen(PORT, () => {
 	console.log(`Server running on port ${PORT}`);
 });
