@@ -5,8 +5,14 @@ const url = process.env.MONGODB_URI;
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const taskSchema = new mongoose.Schema({
-    task: String,
-    completed: {type: Boolean, default: false}
+    task: {
+        type: String,
+        required: true
+    },
+    completed: {
+        type: Boolean, 
+        default: false
+    }
 });
 
 mongoose.set('toJSON', {
