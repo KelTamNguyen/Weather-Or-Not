@@ -1,6 +1,4 @@
-/* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable no-unused-vars */
-import dotenv from 'dotenv';
 import { useEffect, useState } from 'react';
 import Header from './Header';
 import Form from './Form';
@@ -9,7 +7,7 @@ import WeatherWidget from './WeatherWidget';
 import axios from 'axios';
 import Loading from './Loading';
 import { nanoid } from 'nanoid';
-//import taskService from '../services/task';
+import taskService from '../services/tasks.js';
 
 export default function Card(props) {
 	const [units, setUnits] = useState('imperial');
@@ -53,9 +51,11 @@ export default function Card(props) {
 	}
 
 	useEffect(() => {
-		axios
-			.get('http://localhost:3001/tasks')
-			.then(response => setTasks(response.data));
+		taskService
+			.getTasks()
+			.then(initialTasks => {
+				setTasks(initialTasks);
+			});
 		getWeatherAtLocation();
 	}, []);
 
@@ -88,10 +88,10 @@ export default function Card(props) {
 				completed: false
 			};
 
-			axios
-				.post('http://localhost:3001/tasks', newTask)
-				.then(response => {
-					setTasks(tasks.concat(response.data));
+			taskService
+				.addTask(newTask)
+				.then(newTask => {
+					setTasks(tasks.concat(newTask));
 				});
 		} else {
 			alert(`Item "${name}" already exists`);
@@ -99,22 +99,11 @@ export default function Card(props) {
 	}
 
 	function toggleCompletionStatus(id) {
-		let updatedTaskList = tasks.map(todo => {
-			if (todo.id === id) {
-				//return {...todo, active: !todo.active};
-				const changedTask = {...todo, completed: !todo.active};
-				axios
-					.put(`http://localhost:3001/tasks/${id}`, changedTask)
-					.then(response => {
-						setTasks(tasks.map(task => {
-							// eslint-disable-next-line no-unused-expressions
-							task.id !== id ? task : response.data;
-						}))
-					})
-			} 
-			return todo;
-		});
-		setTasks(updatedTaskList);
+		const task = tasks.find(task => task.id === id);
+		const changedTask = { ...task, completed: !task.completed };
+		taskService
+			.updateTask(id, changedTask)
+			.then(updatedTask => setTasks(tasks.map(task => task.id !== id ? task : updatedTask)));
 	}
 
 	return (

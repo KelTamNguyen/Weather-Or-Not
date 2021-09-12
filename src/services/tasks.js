@@ -1,25 +1,25 @@
 import axios from 'axios';
 
-const baseUrl = 'localhost:3001/api/tasks'
+const baseUrl = 'http://localhost:3001/api/tasks'
 
-const getAllTasks = () => {
+const getTasks = () => {
     const request = axios.get(baseUrl);
-    return request.then(() => request.data);
+    return request.then(response => response.data);
 }
 
-const addTask = () => {
-    const request = axios.post(baseUrl);
-    return request.then(() => request.data);
+const addTask = (newTask) => {
+    const request = axios.post(baseUrl, newTask);
+    return request.then(response => response.data);
 }
 
 const deleteTask = (id) => {
     const request = axios.delete(`${baseUrl}/${id}`);
-    return request.then(() => request.data);
+    return request.then(response => response.data);
 }
 
 const updateTask = (id, taskObject) => {
     const request = axios.put(`${baseUrl}/${id}`, taskObject);
-    return request.then(() => request.data);
+    return request.then(response => response.data);
 }
 
-export default { getAllTasks, addTask, deleteTask, updateTask }
+export default { getTasks, addTask, deleteTask, updateTask }

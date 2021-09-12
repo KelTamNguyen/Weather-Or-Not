@@ -8,7 +8,7 @@
     {
       "id": "td-1",
       "task": "Learn More Code",
-      "completed": false
+      "completed": true
     },
     {
       "id": 2,
@@ -18,7 +18,7 @@
     {
       "id": 3,
       "task": "Netflix",
-      "completed": false
+      "completed": true
     },
     {
       "id": 4,
@@ -67,6 +67,11 @@
       "task": "e",
       "completed": true,
       "complete": true
+    },
+    {
+      "id": "mc3_HOWo-VQhnET3In1Pu",
+      "task": "ooh",
+      "completed": false
     }
   ]
 }
