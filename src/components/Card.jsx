@@ -1,5 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable no-unused-vars */
+import dotenv from 'dotenv';
 import { useEffect, useState } from 'react';
 import Header from './Header';
 import Form from './Form';
@@ -17,6 +18,7 @@ export default function Card(props) {
 	const [loading, setLoading] = useState(true);
 	const [city, setCity] = useState(null);
 	const [tasks, setTasks] = useState([]);
+	const [userInput, setUserInput] = useState('');
 
 	const OPENWEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather?';
 
@@ -39,7 +41,7 @@ export default function Card(props) {
 
 	function getCity(lat, lon) {
 		axios
-			.get(`https://us1.locationiq.com/v1/reverse.php?key=${process.env.LOCATIONIQ_ID}&lat=${lat}&lon=${lon}&format=json`)
+			.get(`https://us1.locationiq.com/v1/reverse.php?key=${process.env.REACT_APP_LOCATIONIQ_ID}&lat=${lat}&lon=${lon}&format=json`)
 			.then((response) => {
 				let address = response.data.address;
 				setCity(address.city);
@@ -80,17 +82,35 @@ export default function Card(props) {
 	function addTask(name) {
 		if (tasks.filter(todo => todo.action === name).length === 0) {
 			//
-			const newTask = {id: nanoid(), task: name, completed: false};
-			setTasks(tasks.concat(newTask));
+			const newTask = {
+				id: nanoid(), 
+				task: name, 
+				completed: false
+			};
+
+			axios
+				.post('http://localhost:3001/tasks', newTask)
+				.then(response => {
+					setTasks(tasks.concat(response.data));
+				});
 		} else {
 			alert(`Item "${name}" already exists`);
 		}
 	}
 
-	function toggleActiveStatus(id) {
+	function toggleCompletionStatus(id) {
 		let updatedTaskList = tasks.map(todo => {
 			if (todo.id === id) {
-				return {...todo, active: !todo.active};
+				//return {...todo, active: !todo.active};
+				const changedTask = {...todo, completed: !todo.active};
+				axios
+					.put(`http://localhost:3001/tasks/${id}`, changedTask)
+					.then(response => {
+						setTasks(tasks.map(task => {
+							// eslint-disable-next-line no-unused-expressions
+							task.id !== id ? task : response.data;
+						}))
+					})
 			} 
 			return todo;
 		});
@@ -119,7 +139,7 @@ export default function Card(props) {
 							removeItem={removeItem}
 							editItem={editItem}
 							completed={todo.completed}
-							toggleActiveStatus={toggleActiveStatus}
+							toggleCompletionStatus={toggleCompletionStatus}
 						/>
 					))}
 				</ul>
