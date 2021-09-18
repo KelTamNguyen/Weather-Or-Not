@@ -1,0 +1,7 @@
+POST http://localhost:3001/api/tasks
+content-type: application/json
+
+{
+    "task": "Beef up resume",
+    "completed": false
+}
