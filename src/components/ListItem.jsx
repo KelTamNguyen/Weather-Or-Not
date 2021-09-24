@@ -2,7 +2,7 @@
 import { React, useState } from 'react';
 import { AiFillEdit, AiFillCloseCircle } from 'react-icons/ai';
 
-export default function ListItem({ id, action, removeItem, editItem, completed, toggleCompletionStatus }) {
+export default function ListItem({ id, task, removeTask, editTask, completed, toggleCompletionStatus }) {
 
 	const [editing, setEditing] = useState('false');
 	const [currentValue, setCurrentValue] = useState('');
@@ -14,7 +14,7 @@ export default function ListItem({ id, action, removeItem, editItem, completed, 
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		editItem(id, currentValue);
+		editTask(id, currentValue);
 		setCurrentValue('');
 		setEditing(false);
 	}
@@ -29,7 +29,7 @@ export default function ListItem({ id, action, removeItem, editItem, completed, 
 					onChange={() => toggleCompletionStatus(id)}
 				/>
 				<label htmlFor="action">
-					<h2>{action}</h2>
+					<h2>{task}</h2>
 				</label>
 			</div>
 			<div className="btn-group">
@@ -41,7 +41,7 @@ export default function ListItem({ id, action, removeItem, editItem, completed, 
 				</button>
 				<button 
 					type="button"
-					onClick={() => {removeItem(id);}}  
+					onClick={() => {removeTask(id);}}  
 				>
 					<AiFillCloseCircle />
 				</button>
@@ -55,7 +55,7 @@ export default function ListItem({ id, action, removeItem, editItem, completed, 
 				<input 
 					type="text" 
 					id="my-input" 
-					placeholder={action} 
+					placeholder={task} 
 					name="todo" 
 					onChange={handleChange} 
 					value={currentValue} 
@@ -73,7 +73,7 @@ export default function ListItem({ id, action, removeItem, editItem, completed, 
 				</button>
 				<button 
 					type="button"
-					onClick={() => {removeItem(id);}}  
+					onClick={() => {removeTask(id);}}  
 				>
 					<AiFillCloseCircle />
 				</button>
@@ -82,7 +82,6 @@ export default function ListItem({ id, action, removeItem, editItem, completed, 
 	);
 
 	return(
-	// {viewTemplate}
 		<li>
 			{(editing === true) ? editingTemplate : defaultTemplate} 
 		</li>

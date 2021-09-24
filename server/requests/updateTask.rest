@@ -1,0 +1,7 @@
+PUT http://localhost:3001/api/tasks/614d22b4f905d34228d37caa
+content-type: application/json
+
+{
+    "task": "Beef up Resume!",
+    "completed": "false"
+}

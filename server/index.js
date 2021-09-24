@@ -28,50 +28,44 @@ app.get('/api/tasks/:id', (req, res) => {
 });
 
 app.post('/api/tasks', (req, res) =>{
-	// const body = req.body;
+	const body = req.body;
 
-	// if (!body.task) {
-	// 	res.status(400).json({
-	// 		error: "content missing"
-	// 	});
-	// }
+	if (body.task === undefined) {
+		return res.status(400).send({error: "Task Missing!"});
+	}
 
-	// const task = {
-	// 	task: body.task,
-	// 	completed: body.completed || false,
-	// 	id: generateId()
-	// };
+	const task = Task({
+		task: body.task,
+		completed: body.completed || false,
+		date: new Date()
+	});
 
-	// console.log(task);
-	// res.json(task);
+	task.save().then(savedTask => {
+		res.json(savedTask);
+	});
 });
 
 app.put('/api/tasks/:id', (req, res) => {
-	//Task.updateOne()
 	const body = req.body;
 
 	if (!body.task) {
 		return res.status(400).json({msg : 'no task specified'});
 	}
 
-	const task = new Task({
+	const task = {
 		task: body.task,
 		completed: body.completed,
-		date: body.date
+		date: new Date()
+	};
+
+	Task.findByIdAndUpdate(req.params.id, task, {new: true}).then(updatedTask => {
+		res.json(updatedTask.toJSON());
 	});
-
-	task
-		.save()
-		.then(savedTask => {
-			res.json(savedTask.toJSON());
-		});
-
-	Task.findByIdAndUpdate(req.params.id);
 });
 
 const unknownEndpoint = (request, response) => {
 	response.status(404).send({ error: 'unknown endpoint' });
-}
+};
 
 app.use(unknownEndpoint);
 

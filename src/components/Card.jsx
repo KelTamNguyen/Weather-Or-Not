@@ -64,24 +64,27 @@ export default function Card(props) {
 		getWeatherAtLocation();
 	}
 
-	function removeItem(id) {
+	function removeTask(id) {
 		const newTodoList = tasks.filter(todo => todo.id !== id);
 		setTasks(newTodoList);
 	}
 
-	function editItem(id, newName) {
-		const editedTodoList = tasks.map(todo => {
-			if (id === todo.id) {
-				return {...todo, action: newName};
-			}
-			return todo;
-		});
-		setTasks(editedTodoList);
+	function editTask(id, newName) {
+		const task = tasks.find(task => task.id === id);
+
+		const newTask = {
+			...task,
+			task: newName
+		}
+		
+		taskService
+			.updateTask(id, newTask)
+			.then(updatedTask => setTasks(tasks.map(task => task.id !== id ? task : updatedTask)));
 	}
 
 	function addTask(name) {
-		if (tasks.filter(todo => todo.action === name).length === 0) {
-			//
+		if (tasks.filter(todo => todo.task === name).length === 0) {
+			
 			const newTask = {
 				id: nanoid(), 
 				task: name, 
@@ -123,10 +126,9 @@ export default function Card(props) {
 						<ListItem 
 							key={todo.id}
 							id={todo.id}
-							//action={todo.action}
-							action={todo.task}
-							removeItem={removeItem}
-							editItem={editItem}
+							task={todo.task}
+							removeTask={removeTask}
+							editTask={editTask}
 							completed={todo.completed}
 							toggleCompletionStatus={toggleCompletionStatus}
 						/>
